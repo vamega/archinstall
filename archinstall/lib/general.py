@@ -47,11 +47,11 @@ class sys_command:  # Thread):
     """
 
     def __init__(self, cmd, callback=None, start_callback=None, *args, **kwargs):
-        if not "worker_id" in kwargs:
+        if "worker_id" not in kwargs:
             kwargs["worker_id"] = gen_uid()
-        if not "emulate" in kwargs:
+        if "emulate" not in kwargs:
             kwargs["emulate"] = False
-        if not "surpress_errors" in kwargs:
+        if "surpress_errors" not in kwargs:
             kwargs["surpress_errors"] = False
         if kwargs["emulate"]:
             log(f"Starting command '{cmd}' in emulation mode.")
@@ -62,7 +62,7 @@ class sys_command:  # Thread):
             raise ValueError(f"Incorrect string to split: {cmd}\n{e}")
         self.args = args
         self.kwargs = kwargs
-        if not "worker" in self.kwargs:
+        if "worker" not in self.kwargs:
             self.kwargs["worker"] = None
         self.callback = callback
         self.pid = None

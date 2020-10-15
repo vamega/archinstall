@@ -141,7 +141,7 @@ while 1:
 packages = input("Additional packages aside from base (space separated): ").split(" ")
 
 """
-	Issue a final warning before we continue with something un-revertable.
+    Issue a final warning before we continue with something un-revertable.
 """
 print(f" ! Formatting {harddrive} in 5...")
 time.sleep(1)
@@ -155,8 +155,8 @@ print(f" ! Formatting {harddrive} in 1...")
 time.sleep(1)
 
 """
-	Setup the blockdevice, filesystem (and optionally encryption).
-	Once that's done, we'll hand over to perform_installation()
+    Setup the blockdevice, filesystem (and optionally encryption).
+    Once that's done, we'll hand over to perform_installation()
 """
 with archinstall.Filesystem(harddrive, archinstall.GPT) as fs:
     # Use partitioning helper to set up the disk partitions.

@@ -107,7 +107,7 @@ def list_mirrors():
         if line[:3] == "## ":
             region = line[3:]
         elif line[:10] == "#Server = ":
-            if not region in regions:
+            if region not in regions:
                 regions[region] = {}
 
             url = line[1:].lstrip("Server = ")

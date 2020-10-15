@@ -33,7 +33,7 @@ if __name__ == "awesome":
 
     # Then setup and configure the desktop environment: awesome
     arguments = {
-        #'keyboard_layout' : 'sv-latin1',
+        # 'keyboard_layout' : 'sv-latin1',
         "editor": "nano",
         "mediaplayer": "lollypop gstreamer gst-plugins-good gnome-keyring",
         "filebrowser": "nemo gpicview-gtk3",

@@ -45,7 +45,7 @@ class luks2:
                 f"/usr/bin/cryptsetup -q -v --type luks2 --pbkdf argon2i --hash {hash_type} --key-size {key_size} --iter-time {iter_time} --key-file {os.path.abspath(key_file)} --use-urandom luksFormat {partition.path}"
             )
         )
-        if not b"Command successful." in o:
+        if b"Command successful." not in o:
             raise DiskError(f'Could not encrypt volume "{partition.path}": {o}')
 
         return key_file

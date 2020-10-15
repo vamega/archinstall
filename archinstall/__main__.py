@@ -37,7 +37,7 @@ def run_as_a_module():
     profile = sys.argv[1]
     library = find_examples()
 
-    if not f"{profile}.py" in library:
+    if f"{profile}.py" not in library:
         raise ProfileNotFound(f"Could not locate {profile}.py among the example files.")
 
     # Import and execute the chosen `<profile>.py`:
