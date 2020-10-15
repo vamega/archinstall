@@ -126,7 +126,7 @@ while 1:
     if type(profile) != str:  # Got a imported profile
         if not profile[1]._prep_function():
             archinstall.log(
-                " * Profile's preperation requirements was not fulfilled.",
+                " * Profile's preparation requirements was not fulfilled.",
                 bg="black",
                 fg="red",
             )

@@ -173,7 +173,7 @@ def select_mirror_regions(mirrors, show_top_mirrors=True):
     :rtype: dict
     """
 
-    # TODO: Support multiple options and country ycodes, SE,UK for instance.
+    # TODO: Support multiple options and country codes, SE,UK for instance.
     regions = sorted(list(mirrors.keys()))
     selected_mirrors = {}
 
