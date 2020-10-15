@@ -4,7 +4,7 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open('VERSION', 'r') as fh:
+with open("VERSION", "r") as fh:
     VERSION = fh.read()
 
 setuptools.setup(
@@ -22,6 +22,8 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: POSIX :: Linux",
     ],
-    python_requires='>=3.8',
-    package_data={'archinstall': glob.glob('examples/*.py') + glob.glob('profiles/*.py')},
+    python_requires=">=3.8",
+    package_data={
+        "archinstall": glob.glob("examples/*.py") + glob.glob("profiles/*.py")
+    },
 )
