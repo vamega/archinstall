@@ -1,5 +1,3 @@
-import archinstall
-
 installation.add_additional_packages("awesome xorg-xrandr xterm feh slock terminus-font-otb gnu-free-fonts ttf-liberation xsel")
 
 with open(f'{installation.mountpoint}/etc/X11/xinit/xinitrc', 'r') as xinitrc:

@@ -1,7 +1,6 @@
-import os
-from .exceptions import *
 from .general import *
-from .disk import Partition
+from .general import *
+
 
 class luks2():
 	def __init__(self, partition, mountpoint, password, *args, **kwargs):

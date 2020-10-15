@@ -1,7 +1,9 @@
-import archinstall
 import json
 import urllib.request
+
 import git
+
+import archinstall
 
 # Unmount and close previous runs (Mainly only used for re-runs, but won't hurt.)
 archinstall.sys_command(f'umount -R /mnt', surpress_errors=True)

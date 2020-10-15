@@ -1,6 +1,3 @@
-import os
-
-from .exceptions import *
 from .general import *
 
 def service_state(service_name :str):

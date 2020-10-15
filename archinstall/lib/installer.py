@@ -1,11 +1,6 @@
-import os, stat
-
-from .exceptions import *
-from .disk import *
-from .general import *
-from .user_interaction import *
-from .profiles import Profile
 from .mirrors import *
+from .profiles import Profile
+
 
 class Installer():
 	"""

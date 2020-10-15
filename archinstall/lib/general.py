@@ -1,9 +1,15 @@
-import os, json, hashlib, shlex, sys
-import time, pty
-from subprocess import Popen, STDOUT, PIPE, check_output
+import hashlib
+import json
+import os
+import pty
+import shlex
+import time
+
 from select import epoll, EPOLLIN, EPOLLHUP
+
 from .exceptions import *
 from .output import *
+
 
 def gen_uid(entropy_length=256):
 	return hashlib.sha512(os.urandom(entropy_length)).hexdigest()

@@ -1,7 +1,7 @@
 import urllib.request
 
-from .exceptions import *
 from .general import *
+
 
 def filter_mirrors_by_region(regions, destination='/etc/pacman.d/mirrorlist', tmp_dir='/root', *args, **kwargs):
 	"""

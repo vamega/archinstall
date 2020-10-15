@@ -1,4 +1,5 @@
-import archinstall, getpass
+import archinstall
+import getpass
 
 # Unmount and close previous runs
 archinstall.sys_command(f'umount -R /mnt', surpress_errors=True)

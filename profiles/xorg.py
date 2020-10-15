@@ -1,6 +1,6 @@
 # A desktop environemtn using "Awesome" window manager.
 
-import archinstall, os
+import archinstall
 
 AVAILABLE_DRIVERS = {
 	# Sub-dicts are layer-2 options to be selected

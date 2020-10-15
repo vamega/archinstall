@@ -1,5 +1,6 @@
-import archinstall
 import time
+
+import archinstall
 
 for name, info in archinstall.list_profiles().items():
 	# Tailored means it's a match for this machine

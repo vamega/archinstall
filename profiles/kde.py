@@ -1,6 +1,8 @@
 # A desktop environemtn using "Awesome" window manager.
 
-import archinstall, os
+import archinstall
+import os
+
 
 # TODO: Remove hard dependency of bash (due to .bash_profile)
 

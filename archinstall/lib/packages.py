@@ -1,5 +1,7 @@
-import urllib.request, urllib.parse
-import ssl, json
+import json
+import ssl
+import urllib.parse
+import urllib.request
 
 BASE_URL = 'https://www.archlinux.org/packages/search/json/?name={package}'
 

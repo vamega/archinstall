@@ -1,8 +1,12 @@
-import os, urllib.request, urllib.parse, ssl, json, re
-import importlib.util, sys
-from collections import OrderedDict
-from .general import multisplit, sys_command, log
-from .exceptions import *
+import importlib.util
+import os
+import re
+import ssl
+import sys
+import urllib.parse
+import urllib.request
+
+from .general import multisplit, log
 from .networking import *
 
 UPSTREAM_URL = 'https://raw.githubusercontent.com/Torxed/archinstall/master/profiles'

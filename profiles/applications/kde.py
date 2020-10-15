@@ -1,5 +1,3 @@
-import archinstall
-
 installation.add_additional_packages("plasma-meta kde-applications-meta") # We'll support plasma-desktop (minimal) later
 
 with open(f'{installation.mountpoint}/etc/X11/xinit/xinitrc', 'r') as xinitrc:

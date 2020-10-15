@@ -1,6 +1,6 @@
-import glob, re, os, json
+import re
 from collections import OrderedDict
-from .exceptions import *
+
 from .general import *
 
 ROOT_DIR_PATTERN = re.compile('^.*?/devices')

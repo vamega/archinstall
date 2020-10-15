@@ -1,6 +1,7 @@
 from .exceptions import *
-from .profiles import Profile
 from .locale_helpers import search_keyboard_layout
+from .profiles import Profile
+
 
 ## TODO: Some inconsistencies between the selection processes.
 ##       Some return the keys from the options, some the values?

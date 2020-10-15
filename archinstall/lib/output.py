@@ -1,5 +1,7 @@
 import sys
+
 from .tts import TTS
+
 
 # Found first reference here: https://stackoverflow.com/questions/7445658/how-to-detect-if-the-console-does-support-ansi-escape-codes-in-python
 # And re-used this: https://github.com/django/django/blob/master/django/core/management/color.py#L12

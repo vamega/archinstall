@@ -1,5 +1,8 @@
-import archinstall, sys, os, glob
+import glob
 import importlib.util
+import os
+import sys
+
 
 # TODO: Learn the dark arts of argparse...
 #       (I summon thee dark spawn of cPython)

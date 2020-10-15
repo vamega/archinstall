@@ -3,7 +3,6 @@ import socket
 import struct
 from collections import OrderedDict
 
-from .exceptions import *
 
 def getHwAddr(ifname):
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

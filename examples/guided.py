@@ -1,4 +1,7 @@
-import archinstall, getpass, time
+import archinstall
+import getpass
+import time
+
 
 def perform_installation(device, boot_partition, language, mirrors):
 	"""
