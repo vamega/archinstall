@@ -77,7 +77,7 @@ def select_profile(options):
         elif selected_profile in options:
             selected_profile = options[options.index(selected_profile)]
         else:
-            RequirementError("Selected profile does not exist.")
+            raise RequirementError("Selected profile does not exist.")
 
         profile = Profile(None, selected_profile)
         with open(profile.path, "r") as source:
@@ -109,8 +109,9 @@ def select_language(options, show_only_country_codes=True):
     Asks the user to select a language from the `options` dictionary parameter.
     Usually this is combined with :ref:`archinstall.list_keyboard_languages`.
 
-    :param options: A `dict` where keys are the language name, value should be a dict containing language information.
-    :type options: dict
+    :param options: A `dict` where keys are the language name, value should be a dict
+    containing language information.
+    :type options: Iterable[str]
 
     :param show_only_country_codes: Filters out languages that are not len(lang) == 2. This to limit the number of results from stuff like dvorak and x-latin1 alternatives.
     :type show_only_country_codes: bool
@@ -150,7 +151,7 @@ def select_language(options, show_only_country_codes=True):
         elif selected_language in options:
             selected_language = options[options.index(selected_language)]
         else:
-            RequirementError("Selected language does not exist.")
+            raise RequirementError("Selected language does not exist.")
         return selected_language
 
     raise RequirementError(
@@ -216,7 +217,7 @@ def select_mirror_regions(mirrors, show_top_mirrors=True):
         elif selected_mirror in mirrors:
             selected_mirrors[selected_mirror] = mirrors[selected_mirror]
         else:
-            RequirementError("Selected region does not exist.")
+            raise RequirementError("Selected region does not exist.")
 
         return selected_mirrors
 

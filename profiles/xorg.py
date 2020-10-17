@@ -1,6 +1,7 @@
 # A system with "xorg" installed
 
 import archinstall
+from archinstall import RequirementError
 
 AVAILABLE_DRIVERS = {
     # Sub-dicts are layer-2 options to be selected
@@ -58,7 +59,7 @@ def select_driver(options):
         elif selected_driver in options:
             selected_driver = options[options.index(selected_driver)]
         else:
-            RequirementError("Selected driver does not exist.")
+            raise RequirementError("Selected driver does not exist.")
 
         if type(selected_driver) == dict:
             driver_options = sorted(list(selected_driver))
@@ -79,7 +80,7 @@ def select_driver(options):
                     selected_driver.index(selected_driver_package_group)
                 ]
             else:
-                RequirementError(
+                raise RequirementError(
                     f"Selected driver-type does not exist for {initial_option}."
                 )
 
