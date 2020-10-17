@@ -304,21 +304,21 @@ def device_state(name, *args, **kwargs):
 
 
 # lsblk --json -l -n -o path
-def all_disks(*args, **kwargs):
+def all_disks(*args, **kwargs) -> dict[str, BlockDevice]:
     if "partitions" not in kwargs:
         kwargs["partitions"] = False
-    drives = OrderedDict()
+
+    drives = {}
     # for drive in json.loads(sys_command(f'losetup --json', *args, **lkwargs, hide_from_log=True)).decode('UTF_8')['loopdevices']:
-    for drive in json.loads(
-        b"".join(
-            sys_command(
-                f"lsblk --json -l -n -o path,size,type,mountpoint,label,pkname",
-                *args,
-                **kwargs,
-                hide_from_log=True,
-            )
-        ).decode("UTF_8")
-    )["blockdevices"]:
+    lsblk_output = b"".join(
+        sys_command(
+            f"lsblk --json -l -n -o path,size,type,mountpoint,label,pkname",
+            *args,
+            **kwargs,
+            hide_from_log=True,
+        )
+    ).decode("UTF_8")
+    for drive in json.loads(lsblk_output)["blockdevices"]:
         if not kwargs["partitions"] and drive["type"] == "part":
             continue
 

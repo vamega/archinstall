@@ -1,3 +1,4 @@
+from .disk import BlockDevice
 from .exceptions import *
 from .locale_helpers import search_keyboard_layout
 from .profiles import Profile
@@ -7,16 +8,18 @@ from .profiles import Profile
 ##       Some return the keys from the options, some the values?
 
 
-def select_disk(dict_o_disks):
+def select_disk(dict_o_disks: dict[str, BlockDevice]) -> BlockDevice:
     """
     Asks the user to select a harddrive from the `dict_o_disks` selection.
     Usually this is combined with :ref:`archinstall.list_drives`.
 
-    :param dict_o_disks: A `dict` where keys are the drive-name, value should be a dict containing drive information.
-    :type dict_o_disks: dict
+    :param dict_o_disks: A `dict` where keys are the drive-name
+    :type dict_o_disks: dict from drive-name to BlockDevice
 
     :return: The name/path (the dictionary key) of the selected drive
     :rtype: str
+    :raises: DiskError, if the disk does not exist or if an empty dict is provided as
+        an argument.
     """
     drives = sorted(list(dict_o_disks.keys()))
     if len(drives) >= 1:
@@ -24,13 +27,13 @@ def select_disk(dict_o_disks):
             print(
                 f"{index}: {drive} ({dict_o_disks[drive]['size'], dict_o_disks[drive].device, dict_o_disks[drive]['label']})"
             )
-        drive = input("Select one of the above disks (by number or full path): ")
-        if drive.isdigit():
-            drive = dict_o_disks[drives[int(drive)]]
-        elif drive in dict_o_disks:
-            drive = dict_o_disks[drive]
+        user_input = input("Select one of the above disks (by number or full path): ")
+        if user_input.isdigit():
+            drive = dict_o_disks[drives[int(user_input)]]
+        elif user_input in dict_o_disks:
+            drive = dict_o_disks[user_input]
         else:
-            raise DiskError(f'Selected drive does not exist: "{drive}"')
+            raise DiskError(f'Selected drive does not exist: "{user_input}"')
         return drive
 
     raise DiskError(
