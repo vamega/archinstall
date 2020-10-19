@@ -5,6 +5,7 @@ import ssl
 import sys
 import urllib.parse
 import urllib.request
+from typing import Dict
 
 from .general import multisplit, log
 from .networking import *
@@ -26,7 +27,7 @@ def grab_url_data(path):
     return response.read()
 
 
-def list_profiles(base="./profiles/", filter_irrelevant_macs=True):
+def list_profiles(base="./profiles/", filter_irrelevant_macs=True) -> Dict[str, Dict]:
     # TODO: Grab from github page as well, not just local static files
     if filter_irrelevant_macs:
         local_macs = list_interfaces()

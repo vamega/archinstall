@@ -1,4 +1,5 @@
 import urllib.request
+from typing import Dict
 
 from .general import *
 
@@ -92,7 +93,7 @@ def re_rank_mirrors(top=10, *positionals, **kwargs):
     return False
 
 
-def list_mirrors():
+def list_mirrors() -> Dict[str, Dict[str, bool]]:
     url = f"https://www.archlinux.org/mirrorlist/?protocol=https&ip_version=4&ip_version=6&use_mirror_status=on"
 
     response = urllib.request.urlopen(url)

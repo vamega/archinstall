@@ -1,3 +1,7 @@
+from collections import Iterable
+
+from typing import Dict
+
 from .disk import BlockDevice
 from .exceptions import *
 from .locale_helpers import search_keyboard_layout
@@ -8,7 +12,7 @@ from .profiles import Profile
 ##       Some return the keys from the options, some the values?
 
 
-def select_disk(dict_o_disks: dict[str, BlockDevice]) -> BlockDevice:
+def select_disk(dict_o_disks: Dict[str, BlockDevice]) -> BlockDevice:
     """
     Asks the user to select a harddrive from the `dict_o_disks` selection.
     Usually this is combined with :ref:`archinstall.list_drives`.
@@ -41,7 +45,7 @@ def select_disk(dict_o_disks: dict[str, BlockDevice]) -> BlockDevice:
     )
 
 
-def select_profile(options):
+def select_profile(options: Dict):
     """
     Asks the user to select a profile from the `options` dictionary parameter.
     Usually this is combined with :ref:`archinstall.list_profiles`.
@@ -107,7 +111,7 @@ def select_profile(options):
     )
 
 
-def select_language(options, show_only_country_codes=True):
+def select_language(options: Iterable[str], show_only_country_codes: bool = True):
     """
     Asks the user to select a language from the `options` dictionary parameter.
     Usually this is combined with :ref:`archinstall.list_keyboard_languages`.
@@ -116,7 +120,9 @@ def select_language(options, show_only_country_codes=True):
     containing language information.
     :type options: Iterable[str]
 
-    :param show_only_country_codes: Filters out languages that are not len(lang) == 2. This to limit the number of results from stuff like dvorak and x-latin1 alternatives.
+    :param show_only_country_codes: Filters out languages that are not len(lang) == 2.
+        This to limit the number of results from stuff like dvorak and x-latin1
+        alternatives.
     :type show_only_country_codes: bool
 
     :return: The language/dictionary key of the selected language

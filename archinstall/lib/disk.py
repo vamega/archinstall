@@ -1,5 +1,6 @@
 import re
 from collections import OrderedDict
+from typing import Dict
 
 from .general import *
 
@@ -154,7 +155,6 @@ class Partition:
             self.filesystem = "fat32"
         else:
             raise DiskError(f"Fileformat {filesystem} is not yet implemented.")
-        return True
 
     def find_parent_of(self, data, name, parent=None):
         if data["name"] == name:
@@ -304,7 +304,7 @@ def device_state(name, *args, **kwargs):
 
 
 # lsblk --json -l -n -o path
-def all_disks(*args, **kwargs) -> dict[str, BlockDevice]:
+def all_disks(*args, **kwargs) -> Dict[str, BlockDevice]:
     if "partitions" not in kwargs:
         kwargs["partitions"] = False
 
