@@ -50,7 +50,8 @@ def select_profile(options: Dict):
     Asks the user to select a profile from the `options` dictionary parameter.
     Usually this is combined with :ref:`archinstall.list_profiles`.
 
-    :param options: A `dict` where keys are the profile name, value should be a dict containing profile information.
+    :param options: A `dict` where keys are the profile name, value should be a dict
+    containing profile information.
     :type options: dict
 
     :return: The name/dictionary key of the selected profile
@@ -173,10 +174,12 @@ def select_mirror_regions(mirrors, show_top_mirrors=True):
     Asks the user to select a mirror or region from the `mirrors` dictionary parameter.
     Usually this is combined with :ref:`archinstall.list_mirrors`.
 
-    :param mirrors: A `dict` where keys are the mirror region name, value should be a dict containing mirror information.
+    :param mirrors: A `dict` where keys are the mirror region name, value should be a
+        dict containing mirror information.
     :type mirrors: dict
 
-    :param show_top_mirrors: Will limit the list to the top 10 fastest mirrors based on rank-mirror *(Currently not implemented but will be)*.
+    :param show_top_mirrors: Will limit the list to the top 10 fastest mirrors based
+        on rank-mirror *(Currently not implemented but will be)*.
     :type show_top_mirrors: bool
 
     :return: The dictionary information about a mirror/region.

@@ -127,7 +127,16 @@ class Partition:
         else:
             return f"Partition(path={self.path}, fs={self.filesystem}, mounted={self.mountpoint})"
 
-    def format(self, filesystem):
+    def format(self, filesystem: str) -> None:
+        """
+        Format the partition with a filesystem.
+
+        :param filesystem: the string representing the filesystem. Currently
+            supported filesystems are `btrfs`, `fat32` and `ext4`.
+        :return: None
+        :raises: DiskError if the disk could not be formatted, or if the
+            filesystem is not supported.
+        """
         log(f"Formatting {self} -> {filesystem}")
         if filesystem == "btrfs":
             o = b"".join(sys_command(f"/usr/bin/mkfs.btrfs -f {self.path}"))
