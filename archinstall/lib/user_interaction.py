@@ -1,3 +1,6 @@
+from typing import Dict
+
+from .disk import BlockDevice
 from .exceptions import *
 from .profiles import Profile
 from .locale_helpers import search_keyboard_layout
@@ -33,13 +36,13 @@ def generic_select(options, input_text="Select one of the above by index or abso
 	
 	return selected_option
 
-def select_disk(dict_o_disks):
+def select_disk(dict_o_disks: Dict[str, BlockDevice]):
 	"""
 	Asks the user to select a harddrive from the `dict_o_disks` selection.
 	Usually this is combined with :ref:`archinstall.list_drives`.
 
-	:param dict_o_disks: A `dict` where keys are the drive-name, value should be a dict containing drive information.
-	:type dict_o_disks: dict
+	:param dict_o_disks: A `dict` where keys are the drive-name
+	:type dict_o_disks: dict from drive-name to BlockDevice
 
 	:return: The name/path (the dictionary key) of the selected drive
 	:rtype: str
@@ -57,7 +60,10 @@ def select_disk(dict_o_disks):
 			raise DiskError(f'Selected drive does not exist: "{drive}"')
 		return drive
 
-	raise DiskError('select_disk() requires a non-empty dictionary of disks to select from.')
+	raise DiskError(
+		"select_disk() requires a non-empty dictionary of disks to select from."
+	)
+
 
 def select_profile(options):
 	"""

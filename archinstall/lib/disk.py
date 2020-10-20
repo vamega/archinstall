@@ -1,6 +1,7 @@
-import glob, re, os, json
+import re
 from collections import OrderedDict
-from .exceptions import DiskError
+from typing import Dict
+
 from .general import *
 
 ROOT_DIR_PATTERN = re.compile('^.*?/devices')
@@ -11,7 +12,7 @@ GPT = 0b00000001
 #libc = ctypes.CDLL(ctypes.util.find_library('c'), use_errno=True)
 #libc.mount.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_ulong, ctypes.c_char_p)
 
-class BlockDevice():
+class BlockDevice:
 	def __init__(self, path, info):
 		self.path = path
 		self.info = info
@@ -246,12 +247,22 @@ def device_state(name, *args, **kwargs):
 	return True
 
 # lsblk --json -l -n -o path
-def all_disks(*args, **kwargs):
+def all_disks(*args, **kwargs) -> Dict[str, BlockDevice]:
 	kwargs.setdefault("partitions", False)
-	drives = OrderedDict()
-	#for drive in json.loads(sys_command(f'losetup --json', *args, **lkwargs, hide_from_log=True)).decode('UTF_8')['loopdevices']:
-	for drive in json.loads(b''.join(sys_command(f'lsblk --json -l -n -o path,size,type,mountpoint,label,pkname', *args, **kwargs, hide_from_log=True)).decode('UTF_8'))['blockdevices']:
-		if not kwargs['partitions'] and drive['type'] == 'part': continue
+	drives = {}
 
-		drives[drive['path']] = BlockDevice(drive['path'], drive)
+	# for drive in json.loads(sys_command(f'losetup --json', *args, **lkwargs, hide_from_log=True)).decode('UTF_8')['loopdevices']:
+	lsblk_output = b"".join(
+		sys_command(
+			f"lsblk --json -l -n -o path,size,type,mountpoint,label,pkname",
+			*args,
+			**kwargs,
+			hide_from_log=True,
+		)
+	).decode("UTF_8")
+	for drive in json.loads(lsblk_output)["blockdevices"]:
+		if not kwargs["partitions"] and drive["type"] == "part":
+			continue
+
+		drives[drive["path"]] = BlockDevice(drive["path"], drive)
 	return drives
