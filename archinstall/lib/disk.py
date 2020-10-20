@@ -115,7 +115,7 @@ class Partition():
 		else:
 			return f'Partition(path={self.path}, fs={self.filesystem}, mounted={self.mountpoint})'
 
-	def format(self, filesystem):
+	def format(self, filesystem) -> None:
 		log(f'Formatting {self} -> {filesystem}')
 		if filesystem == 'btrfs':
 			o = b''.join(sys_command(f'/usr/bin/mkfs.btrfs -f {self.path}'))
@@ -133,7 +133,6 @@ class Partition():
 			self.filesystem = 'fat32'
 		else:
 			raise DiskError(f'Fileformat {filesystem} is not yet implemented.')
-		return True
 
 	def find_parent_of(self, data, name, parent=None):
 		if data['name'] == name:

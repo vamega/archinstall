@@ -6,7 +6,7 @@ from select import epoll, EPOLLIN, EPOLLHUP
 from .exceptions import *
 from .output import *
 
-def gen_uid(entropy_length=256):
+def gen_uid(entropy_length=256) -> str:
 	return hashlib.sha512(os.urandom(entropy_length)).hexdigest()
 
 def multisplit(s, splitters):

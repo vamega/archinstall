@@ -1,6 +1,7 @@
 import os, urllib.request, urllib.parse, ssl, json, re
 import importlib.util, sys
-from collections import OrderedDict
+from typing import Dict
+
 from .general import multisplit, sys_command, log
 from .exceptions import *
 from .networking import *
@@ -15,7 +16,7 @@ def grab_url_data(path):
 	response = urllib.request.urlopen(safe_path, context=ssl_context)
 	return response.read()
 
-def list_profiles(base='./profiles/', filter_irrelevant_macs=True):
+def list_profiles(base='./profiles/', filter_irrelevant_macs=True) -> Dict[str, Dict]:
 	# TODO: Grab from github page as well, not just local static files
 	if filter_irrelevant_macs:
 		local_macs = list_interfaces()
@@ -36,7 +37,11 @@ def list_profiles(base='./profiles/', filter_irrelevant_macs=True):
 					if first_line[0] == '#':
 						description = first_line[1:].strip()
 
-				cache[file[:-3]] = {'path' : os.path.join(root, file), 'description' : description, 'tailored' : tailored}
+				cache[file[:-3]] = {
+					"path": os.path.join(root, file),
+					"description": description,
+					"tailored": tailored
+				}
 		break
 	return cache
 

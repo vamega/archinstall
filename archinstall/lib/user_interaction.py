@@ -1,4 +1,5 @@
-from typing import Dict
+from collections import Iterable, Mapping
+from typing import Dict, Any, Union
 
 from .disk import BlockDevice
 from .exceptions import *
@@ -8,7 +9,11 @@ from .locale_helpers import search_keyboard_layout
 ## TODO: Some inconsistencies between the selection processes.
 ##       Some return the keys from the options, some the values?
 
-def generic_select(options, input_text="Select one of the above by index or absolute value: ", sort=True):
+def generic_select(
+		options: Union[Dict[str, Any], Iterable],
+		input_text: str = "Select one of the above by index or absolute value: ",
+		sort: bool = True
+):
 	"""
 	A generic select function that does not output anything
 	other than the options and their indexs. As an example:
@@ -19,9 +24,12 @@ def generic_select(options, input_text="Select one of the above by index or abso
 	3: third option
 	"""
 
-	if type(options) == dict: options = list(options)
-	if sort: options = sorted(list(options))
-	if len(options) <= 0: raise RequirementError('generic_select() requires at least one option to operate.')
+	if isinstance(options, Mapping):
+		options = list(options)
+	if sort:
+		options = sorted(list(options))
+	if len(options) <= 0:
+		raise RequirementError('generic_select() requires at least one option to operate.')
 
 	for index, option in enumerate(options):
 		print(f"{index}: {option}")
@@ -36,7 +44,7 @@ def generic_select(options, input_text="Select one of the above by index or abso
 	
 	return selected_option
 
-def select_disk(dict_o_disks: Dict[str, BlockDevice]):
+def select_disk(dict_o_disks: Dict[str, BlockDevice]) -> BlockDevice:
 	"""
 	Asks the user to select a harddrive from the `dict_o_disks` selection.
 	Usually this is combined with :ref:`archinstall.list_drives`.
@@ -44,8 +52,8 @@ def select_disk(dict_o_disks: Dict[str, BlockDevice]):
 	:param dict_o_disks: A `dict` where keys are the drive-name
 	:type dict_o_disks: dict from drive-name to BlockDevice
 
-	:return: The name/path (the dictionary key) of the selected drive
-	:rtype: str
+	:return: The device represented by the selected disk.
+	:rtype: BlockDevice
 	"""
 	drives = sorted(list(dict_o_disks.keys()))
 	if len(drives) >= 1:
@@ -65,7 +73,7 @@ def select_disk(dict_o_disks: Dict[str, BlockDevice]):
 	)
 
 
-def select_profile(options):
+def select_profile(options: Dict):
 	"""
 	Asks the user to select a profile from the `options` dictionary parameter.
 	Usually this is combined with :ref:`archinstall.list_profiles`.
@@ -107,7 +115,7 @@ def select_profile(options):
 			#
 			# If the requirements are met, import with .py in the namespace to not
 			# trigger a traditional:
-			#     if __name__ == 'moduleName'
+			#	 if __name__ == 'moduleName'
 			if '__name__' in source_data and '_prep_function' in source_data:
 				with profile.load_instructions(namespace=f"{selected_profile}.py") as imported:
 					if hasattr(imported, '_prep_function'):
@@ -117,7 +125,10 @@ def select_profile(options):
 
 	raise RequirementError("Selecting profiles require a least one profile to be given as an option.")
 
-def select_language(options, show_only_country_codes=True):
+def select_language(
+		options: Dict[str, Any],
+		show_only_country_codes: bool = True
+):
 	"""
 	Asks the user to select a language from the `options` dictionary parameter.
 	Usually this is combined with :ref:`archinstall.list_keyboard_languages`.
